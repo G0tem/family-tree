@@ -1,0 +1,28 @@
+version: '3.9'
+
+networks:
+  family_tree_project:
+    driver: bridge
+
+services:
+    postgres_db:
+    image: postgres:15
+    container_name: postgres_family_tree
+    env_file:
+      - .env
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+    networks:
+      - family_tree_project
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
