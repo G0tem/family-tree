@@ -6,8 +6,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class User(SQLAlchemyBaseUserTable[int], Base):
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    id: Mapped[int] = mapped_column(
+                    Integer, 
+                    primary_key=True
+                )
 
     @classmethod
     def get_db(cls, session: AsyncSession):
-        return SQLAlchemyUserDatabase(session, User)
+        return SQLAlchemyUserDatabase(session, cls)
