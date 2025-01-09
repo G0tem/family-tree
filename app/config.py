@@ -10,3 +10,5 @@ POSTGRES_USER = os.environ.get("POSTGRES_USER")
 POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
 
 MODE = os.environ.get("MODE")
+
+LIFETIME_SECONDS = os.environ.get("LIFETIME_SECONDS")
