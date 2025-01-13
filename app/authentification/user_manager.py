@@ -2,9 +2,9 @@ import logging
 from typing import Optional
 from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, IntegerIDMixin
-from app.models.UserModel import User
-from app.database import get_user_db
-from app.config import RESET_PASSWORD_TOKEN_SECRET, VERIFICATION_TOKEN_SECRET
+from models.UserModel import User
+from .depends import get_user_db
+from config import RESET_PASSWORD_TOKEN_SECRET, VERIFICATION_TOKEN_SECRET
 
 
 log = logging.getLogger(__name__)
