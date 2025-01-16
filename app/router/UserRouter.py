@@ -16,13 +16,13 @@ user_router = APIRouter(
     tags=["User"]
 )
 
-# /login and /logaut
+# login and logaut
 user_router.include_router(
     fastapi_users.get_auth_router(authentication_backend),
     prefix="/auth",
 )
 
-# /register
+# register
 user_router.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate),
     prefix="/auth",
