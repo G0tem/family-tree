@@ -37,3 +37,9 @@ user_router.include_router(
     fastapi_users.get_users_router(UserRead, UserUpdate),
     prefix="/users",
 )
+
+# /verify
+user_router.include_router(
+    fastapi_users.get_verify_router(UserRead),
+    prefix="/verify",
+)
