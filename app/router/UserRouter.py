@@ -1,5 +1,6 @@
 from fastapi_users import FastAPIUsers
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from fastapi.security import HTTPBearer
 from models.UserModel import User
 from authentification.user_manager import get_user_manager
 from authentification.backend import authentication_backend
@@ -11,8 +12,11 @@ fastapi_users = FastAPIUsers[User, int](
     [authentication_backend],
 )
 
+http_bearer = HTTPBearer(auto_error=False)
+
 user_router = APIRouter(
     prefix="/api/v1",
+    dependencies=[Depends(http_bearer)],
     tags=["User"]
 )
 
