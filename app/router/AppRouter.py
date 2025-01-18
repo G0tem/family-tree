@@ -1,4 +1,8 @@
-from fastapi import APIRouter
+from typing import Annotated
+from authentification.fastapi_users import current_user
+from fastapi import APIRouter, Depends
+from schemas.UserSchemas import UserRead
+from models.UserModel import User
 
 
 app_router = APIRouter(
@@ -7,5 +11,10 @@ app_router = APIRouter(
 )
 
 @app_router.get("/app")
-async def root():
-    return {"message": "Hello World"}
+async def root(
+    user: Annotated[
+        User, 
+        Depends(current_user)
+        ],
+):
+    return {"message": "Hello World", "user": UserRead.model_validate(user)}
