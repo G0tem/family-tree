@@ -1,16 +1,9 @@
-from fastapi_users import FastAPIUsers
 from fastapi import APIRouter, Depends
 from fastapi.security import HTTPBearer
-from models.UserModel import User
-from authentification.user_manager import get_user_manager
 from authentification.backend import authentication_backend
 from schemas.UserSchemas import UserRead, UserCreate, UserUpdate
+from authentification.fastapi_users import fastapi_users
 
-
-fastapi_users = FastAPIUsers[User, int](
-    get_user_manager,
-    [authentication_backend],
-)
 
 http_bearer = HTTPBearer(auto_error=False)
 
@@ -22,7 +15,10 @@ user_router = APIRouter(
 
 # /login and /logaut
 user_router.include_router(
-    fastapi_users.get_auth_router(authentication_backend),
+    fastapi_users.get_auth_router(
+        authentication_backend,
+        requires_verification=True,
+    ),
     prefix="/auth",
 )
 
@@ -32,7 +28,7 @@ user_router.include_router(
     prefix="/auth",
 )
 
-# /me and /id
+# /me
 user_router.include_router(
     fastapi_users.get_users_router(UserRead, UserUpdate),
     prefix="/users",
@@ -41,5 +37,9 @@ user_router.include_router(
 # /verify
 user_router.include_router(
     fastapi_users.get_verify_router(UserRead),
-    prefix="/verify",
+)
+
+# /reset-password
+user_router.include_router(
+    fastapi_users.get_reset_password_router(),
 )
