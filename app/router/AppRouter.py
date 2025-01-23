@@ -17,4 +17,13 @@ async def root(
         Depends(current_user)
         ],
 ):
+    """
+    Router info user, hello
+
+    Args:
+        user (Annotated[ User, Depends): authorized user
+
+    Returns:
+        _type_: dict
+    """
     return {"message": "Hello World", "user": UserRead.model_validate(user)}
