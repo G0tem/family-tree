@@ -8,13 +8,11 @@ from sqlalchemy.orm import Mapped, mapped_column
 from database import Base
 
 
-class AccessToken(SQLAlchemyBaseAccessTokenTable[int], Base):  
+class AccessToken(SQLAlchemyBaseAccessTokenTable[int], Base):
     user_id: Mapped[int] = mapped_column(
-                    Integer, 
-                    ForeignKey("user.id", ondelete="cascade"), 
-                    nullable=False
-                )
-    
+        Integer, ForeignKey("user.id", ondelete="cascade"), nullable=False
+    )
+
     @classmethod
     def get_db(cls, session: AsyncSession):
         return SQLAlchemyAccessTokenDatabase(session, cls)

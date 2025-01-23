@@ -2,10 +2,8 @@ from fastapi import APIRouter
 from tasks.worker import process_data
 
 
-tasks_router = APIRouter(
-    prefix="/api/v1",
-    tags=["Tasks"]
-)
+tasks_router = APIRouter(prefix="/api/v1", tags=["Tasks"])
+
 
 @tasks_router.post("/process")
 async def create_task(data: str):

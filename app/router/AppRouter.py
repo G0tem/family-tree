@@ -5,17 +5,12 @@ from schemas.UserSchemas import UserRead
 from models.UserModel import User
 
 
-app_router = APIRouter(
-    prefix="/api/v1",
-    tags=["App"]
-)
+app_router = APIRouter(prefix="/api/v1", tags=["App"])
+
 
 @app_router.get("/app")
 async def root(
-    user: Annotated[
-        User, 
-        Depends(current_user)
-        ],
+    user: Annotated[User, Depends(current_user)],
 ):
     """
     Router info user, hello

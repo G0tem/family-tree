@@ -8,9 +8,7 @@ from authentification.fastapi_users import fastapi_users
 http_bearer = HTTPBearer(auto_error=False)
 
 user_router = APIRouter(
-    prefix="/api/v1",
-    dependencies=[Depends(http_bearer)],
-    tags=["User"]
+    prefix="/api/v1", dependencies=[Depends(http_bearer)], tags=["User"]
 )
 
 # /login and /logaut
