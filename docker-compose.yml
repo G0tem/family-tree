@@ -5,6 +5,23 @@ networks:
     driver: bridge
 
 services:
+  fastapi-app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: fastapi-app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+      - postgres_db
+      - redis
+      - celery
+    volumes:
+      - ./.env:/app/.env
+    networks:
+      - family_tree_project
+
   postgres_db:
     image: postgres:15
     container_name: postgres_family_tree
@@ -71,6 +88,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: my_password
+    volumes:
+      - ./mango:/data/db
     networks:
       - family_tree_project
 
