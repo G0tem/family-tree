@@ -7,3 +7,4 @@
 * Celery
 * PostgreSQL
 * Redis
+* MangoDB
