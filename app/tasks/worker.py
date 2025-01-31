@@ -12,5 +12,5 @@ def process_data(data: str):
     import time
 
     time.sleep(5)
-    time.sleep(10)
+    time.sleep(20)
     return f"Processed: {data}"
