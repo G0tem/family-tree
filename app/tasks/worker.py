@@ -11,5 +11,6 @@ def process_data(data: str):
     # Имитация длительной задачи
     import time
 
+    time.sleep(5)
     time.sleep(10)
     return f"Processed: {data}"
